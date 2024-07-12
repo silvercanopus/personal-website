@@ -1,0 +1,18 @@
+This is a very basic method of project management.
+
+Todo:
+- (content) Write first blog post
+- (tool) Learn Sass
+    - (design) Create some style variables for the website
+- (feature/content) Tools used to create this website
+- (feature) A way to send a message to the author
+- (feature) Dev log page
+    - (content) July Dev Log
+- (feature/content) Sudoku game
+- (feature) Database for storing content
+- (feature) Dynamically list blog posts using JavaScript
+    - (feature) Sort options: newest first (default), oldest first
+- (feature) Footer section?
+- (feature) Search function for the entire website?
+- (tool) Learn the dotenv module
+- (tool) Publish the website using whatever host provider
