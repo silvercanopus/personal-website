@@ -1,0 +1,33 @@
+@use 'variables' as *;
+
+.sudoku-row {
+    display: flex;
+    justify-content: center;
+}
+
+.sudoku-square {
+    height: $sudoku-square-dim;
+    width: $sudoku-square-dim;
+    background-color: $sudoku-square-color;
+    color: $sudoku-text-color;
+    text-align: center;
+    align-content: center;
+
+    // right and bottom border
+    border-right: $sudoku-square-border;
+    border-bottom: $sudoku-square-border;
+}
+
+// Sudoku board - top border
+@for $i from 1 through 9 {
+    #sudoku-square-1-#{$i} {
+        border-top: $sudoku-square-border;
+    }
+}
+
+// Sudoku board - left border
+@for $i from 1 through 9 {
+    #sudoku-square-#{$i}-#{1} {
+        border-left: $sudoku-square-border;
+    }
+}

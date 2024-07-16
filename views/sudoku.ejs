@@ -1,5 +1,6 @@
 <% layout('./layouts/boilerplate') -%>
 <%- include('./partials/navbar') %>
+<link rel="stylesheet" href="/stylesheets/sudoku.css">
 <div class="container my-4">
     <div class="row">
         <div class="col-xl-1">
@@ -7,8 +8,13 @@
         </div>
         <div class="col-lg-6 col-xl-5 mb-2">
             <div class="sudoku-board mb-2 bg-primary">
-                (Board goes here) <br>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, eligendi? Debitis, nam. Laborum soluta itaque quod sit dolores, dolorum tempora pariatur nisi necessitatibus doloribus nobis expedita quam, officiis impedit recusandae sed esse maiores saepe fugit? Placeat corporis minima deleniti esse vero earum omnis quas iusto, quod sequi fugiat, facere delectus.
+                <% for( let row = 1; row <= 9; row++ ) { %>
+                    <div class="sudoku-row m-0 p-0">
+                        <% for( let col = 1; col <= 9; col++ ) { %>
+                            <span class="sudoku-square" id="sudoku-square-<%=row%>-<%=col%>">0</span>
+                        <% } %>
+                    </div>
+                <% } %>
             </div>
             <div class="sudoku-numbers bg-success">
                 (Number keys go here) <br>
