@@ -1,10 +1,17 @@
 <% layout('./layouts/boilerplate') -%>
-<%- include('./partials/navbar', { activePage: "Home" }) %>
-<div class="container-fluid m-0">
-    <div class="row m-4 display-4 justify-content-center">
-        Welcome to my website!
+<header>
+    <%- include('./partials/navbar', { activePage: "Home" }) %>
+</header>
+<main>
+    <div class="container-fluid m-0">
+        <div class="row m-4 display-4 justify-content-center">
+            Welcome to my website!
+        </div>
+        <div class="row justify-content-center">
+            This site is currently under construction
+        </div>
     </div>
-    <div class="row justify-content-center">
-        This site is currently under construction
-    </div>
-</div>
+</main>
+<footer>
+    <%- include('./partials/footer') %>
+</footer>

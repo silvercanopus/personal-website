@@ -1,34 +1,41 @@
 <% layout('./layouts/boilerplate') -%>
-<%- include('./partials/navbar') %>
-<link rel="stylesheet" href="/stylesheets/sudoku.css">
-<div class="container my-4">
-    <div class="row">
-        <div class="col-xl-1">
-            <!-- empty space -->
-        </div>
-        <div class="col-lg-6 col-xl-5 mb-2">
-            <div class="sudoku-board mb-2 bg-primary">
-                <% for( let row = 1; row <= 9; row++ ) { %>
-                    <div class="sudoku-row m-0 p-0">
-                        <% for( let col = 1; col <= 9; col++ ) { %>
-                            <span class="sudoku-square" id="sudoku-square-<%=row%>-<%=col%>">0</span>
-                        <% } %>
-                    </div>
-                <% } %>
+<header>
+    <%- include('./partials/navbar') %>
+</header>
+<main>
+    <link rel="stylesheet" href="/stylesheets/sudoku.css">
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-xl-1">
+                <!-- empty space -->
             </div>
-            <div class="sudoku-numbers bg-success">
-                (Number keys go here) <br>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat excepturi odio nostrum. Quas ullam eaque consequatur, accusantium et, officiis, recusandae incidunt temporibus blanditiis sint reiciendis?
+            <div class="col-lg-6 col-xl-5 mb-2">
+                <div class="sudoku-board mb-2 bg-primary">
+                    <% for( let row = 1; row <= 9; row++ ) { %>
+                        <div class="sudoku-row m-0 p-0">
+                            <% for( let col = 1; col <= 9; col++ ) { %>
+                                <span class="sudoku-square" id="sudoku-square-<%=row%>-<%=col%>">0</span>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="sudoku-numbers bg-success">
+                    (Number keys go here) <br>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat excepturi odio nostrum. Quas ullam eaque consequatur, accusantium et, officiis, recusandae incidunt temporibus blanditiis sint reiciendis?
+                </div>
             </div>
-        </div>
-        <div class="col-lg-6 col-xl-5 mb-2">
-            <div class="sudoku-sideboard bg-secondary">
-                (Sideboard goes here) <br>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. A iusto veritatis tempore. Quia nihil voluptate, nam natus eos vero voluptas iusto nesciunt. Sit adipisci tempore excepturi et, soluta repellendus eius, consequuntur corporis reiciendis ipsam pariatur veniam eaque sint iste reprehenderit fugit harum delectus dolorem minima quasi voluptatem doloribus! Beatae, at.
+            <div class="col-lg-6 col-xl-5 mb-2">
+                <div class="sudoku-sideboard bg-secondary">
+                    (Sideboard goes here) <br>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. A iusto veritatis tempore. Quia nihil voluptate, nam natus eos vero voluptas iusto nesciunt. Sit adipisci tempore excepturi et, soluta repellendus eius, consequuntur corporis reiciendis ipsam pariatur veniam eaque sint iste reprehenderit fugit harum delectus dolorem minima quasi voluptatem doloribus! Beatae, at.
+                </div>
             </div>
-        </div>
-        <div class="col-xl-1">
-            <!-- empty space -->
+            <div class="col-xl-1">
+                <!-- empty space -->
+            </div>
         </div>
     </div>
-</div>
+</main>
+<footer>
+    <%- include('./partials/footer') %>
+</footer>
