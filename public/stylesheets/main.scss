@@ -1,0 +1,15 @@
+@use 'variables' as *;
+
+body {
+    background-color: $color-body;
+    font-family: $font-family;
+}
+
+.navbar {
+    background-color: $color-navbar;
+    font-weight: $font-weight-navbar;
+
+    a {
+        color: $color-navbar-text;
+    }
+} 
