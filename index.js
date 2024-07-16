@@ -36,3 +36,8 @@ app.get('/blog', (req, res) => {
 app.get('/contact', (req, res) => {
     res.render('contact');
 })
+
+// Create route for the sudoku page
+app.get('/sudoku', (req, res) => {
+    res.render('sudoku');
+})
