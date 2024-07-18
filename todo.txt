@@ -6,11 +6,11 @@ Todo:
     - (content) July Dev Log
 - (feature/content) About/Timeline page 
 - (feature/content) Sudoku game
-    - Keyboard event to change square number (num key 1-9)
     - Clickable number board, mouse click event to change square number
     - Board state validation
     - Starting board generator
     - How to play description on side board
+    - Ctrl+Z to undo
     - Optional assistance features
 - (feature/content) Youtube downloader
 - (design) Play around with style more

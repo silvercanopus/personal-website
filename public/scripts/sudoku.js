@@ -5,9 +5,9 @@ class Sudoku {
     #focus = null;
 
     // Constructor
-    // TODO: Add a way to randomize starting board with RNG
+    // TODO: Add a way to randomize starting board with RNG 
     constructor () {
-        this.#board = new Array(9).fill(new Array(9).fill(0));
+        this.#board = new Array(9).fill(0).map(() => new Array(9).fill(0));
     }
 
     // Getter for the board, return a deep copy
@@ -52,6 +52,12 @@ class Sudoku {
         if (!this.isValidCoordinate(row, col)) {
             throw Error("Invalid square coordinate");
         }
+        if (typeof(num) != "number") {
+            throw TypeError("'num' argument must be a number");
+        }
+        if (num < 0 || num > 9) {
+            throw Error("'num' argument must be between 0-9");
+        }
         this.#board[row][col] = num;
     }
 
@@ -82,7 +88,12 @@ function render() {
     const board = sudoku.getBoard();
     for (let r = 0; r < 9; r++) {
         for (let c = 0; c < 9; c++) {
-            squares[r][c].innerText = board[r][c];
+            if (1 <= board[r][c] && board[r][c] <= 9) {
+                squares[r][c].innerText = board[r][c];
+            }
+            else {
+                squares[r][c].innerText = "";
+            }
             squares[r][c].classList.remove('focused');
         }
     }
@@ -119,17 +130,22 @@ page.addEventListener('click', (event) => {
 // Disable some default keyboard events
 page.addEventListener('keydown', (event) => {
     switch (event.key) {
-        // Disable scrolling via arrow keys
-        case "ArrowUp": case "ArrowDown": case "ArrowLeft": case "ArrowRight":
+        // Disable scrolling via keyboard keys
+        case "ArrowUp": case "ArrowDown": case "ArrowLeft": case "ArrowRight": case " ":
             event.preventDefault();
             break;
     }
 })
 
 // Define some keyboard events
+const arrowKeys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+const numberKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 page.addEventListener('keyup', (event) => {
     const keyName = event.key;
-    if (keyName == "ArrowUp" || keyName == "ArrowDown" || keyName == "ArrowLeft" || keyName == "ArrowRight") {
+    console.log(keyName);
+
+    // Movement via arrow keys
+    if (arrowKeys.includes(keyName)) {
         let newFocus = sudoku.getFocus();
         if (newFocus) {
             switch (keyName) {
@@ -150,6 +166,22 @@ page.addEventListener('keyup', (event) => {
                 sudoku.focus(...newFocus);
                 render();
             }
+        }
+    }
+
+    // Changing number via number keys
+    else if (numberKeys.includes(keyName)) {
+        if (sudoku.getFocus()) {
+            sudoku.changeSquare(Number.parseInt(keyName));
+            render();
+        }
+    }
+    
+    // Valid keys for deletion
+    else if (keyName == "Backspace" || keyName == "Delete" || keyName == " ") {
+        if (sudoku.getFocus()) {
+            sudoku.changeSquare(0);
+            render();
         }
     }
 });
