@@ -1,3 +1,4 @@
+/* ===== Board & Squares ===== */
 .sudoku-row {
   display: flex;
   justify-content: center;
@@ -8,6 +9,7 @@
   width: 50px;
   background-color: white;
   color: black;
+  font-size: 1.25em;
   text-align: center;
   align-content: center;
   border-right: 1px solid black;
@@ -88,4 +90,18 @@
 
 .focused {
   background-color: rgb(200, 200, 200);
+}
+
+/* ===== Number Buttons ===== */
+.sudoku-numbers {
+  display: flex;
+  justify-content: center;
+}
+
+.sudoku-number-button {
+  height: 60px;
+  width: 60px;
+  background-color: white;
+  color: black;
+  font-size: 1.5em;
 }/*# sourceMappingURL=sudoku.css.map */

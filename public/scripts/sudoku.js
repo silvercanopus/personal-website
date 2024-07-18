@@ -82,6 +82,7 @@ const squares = [];
 while (squareElements.length) {
     squares.push(squareElements.splice(0, 9));
 }
+const numberButtons = [...document.querySelectorAll('.sudoku-number-button')];
 
 // Function for rendering the current board state onto the page
 function render() {
@@ -185,6 +186,17 @@ page.addEventListener('keyup', (event) => {
         }
     }
 });
+
+// Add click event to the number buttons
+for (let i = 0; i < 9; i++) {
+    numberButtons[i].addEventListener('click', (event) => {
+        if (sudoku.getFocus()) {
+            sudoku.changeSquare(i+1);
+            render();
+        }
+        event.stopPropagation();
+    });
+}
 
 // First render
 render();

@@ -20,8 +20,9 @@
                     <% } %>
                 </div>
                 <div class="sudoku-numbers bg-success">
-                    (Number keys go here) <br>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat excepturi odio nostrum. Quas ullam eaque consequatur, accusantium et, officiis, recusandae incidunt temporibus blanditiis sint reiciendis?
+                    <% for( let i = 1; i <= 9; i++ ) { %>
+                        <button type="button" class="sudoku-number-button" id="sudoku-number-button-<%=i%>"><%=i%></button>
+                    <% } %>
                 </div>
             </div>
             <div class="col-lg-6 col-xl-5 mb-2">

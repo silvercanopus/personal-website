@@ -1,5 +1,6 @@
 @use 'variables' as *;
 
+/* ===== Board & Squares ===== */
 .sudoku-row {
     display: flex;
     justify-content: center;
@@ -9,7 +10,8 @@
     height: $sudoku-square-dim;
     width: $sudoku-square-dim;
     background-color: $sudoku-square-color;
-    color: $sudoku-text-color;
+    color: $sudoku-square-font-color;
+    font-size: $sudoku-square-font-size;
     text-align: center;
     align-content: center;
 
@@ -35,4 +37,18 @@
 // if focused
 .focused {
     background-color: $sudoku-square-color-focused;
+}
+
+/* ===== Number Buttons ===== */
+.sudoku-numbers {
+    display: flex;
+    justify-content: center;
+}
+
+.sudoku-number-button {
+    height: $sudoku-number-button-dim;
+    width: $sudoku-number-button-dim;
+    background-color: $sudoku-number-button-color;
+    color: $sudoku-number-button-font-color;
+    font-size: $sudoku-number-button-font-size;
 }

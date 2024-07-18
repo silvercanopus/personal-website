@@ -6,7 +6,6 @@ Todo:
     - (content) July Dev Log
 - (feature/content) About/Timeline page 
 - (feature/content) Sudoku game
-    - Clickable number board, mouse click event to change square number
     - Board state validation
     - Starting board generator
     - How to play description on side board
