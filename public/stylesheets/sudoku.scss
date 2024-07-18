@@ -31,3 +31,8 @@
         border-left: $sudoku-square-border;
     }
 }
+
+// if focused
+.focused {
+    background-color: $sudoku-square-color-focused;
+}

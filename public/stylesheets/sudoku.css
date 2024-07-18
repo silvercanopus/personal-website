@@ -84,4 +84,8 @@
 
 #sudoku-square-9-1 {
   border-left: 1px solid black;
+}
+
+.focused {
+  background-color: rgb(200, 200, 200);
 }/*# sourceMappingURL=sudoku.css.map */
