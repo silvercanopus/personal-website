@@ -15,22 +15,37 @@
     text-align: center;
     align-content: center;
 
-    // right and bottom border
+    // default border
     border-right: $sudoku-square-border;
     border-bottom: $sudoku-square-border;
 }
 
-// Sudoku board - top border
+// thicker border for board perimeter and 3x3 sections
 @for $i from 1 through 9 {
-    #sudoku-square-1-#{$i} {
-        border-top: $sudoku-square-border;
-    }
-}
+    @for $j from 1 through 9 {
+        @if $i == 1 {
+            #sudoku-square-#{$i}-#{$j} {
+                border-top: $sudoku-square-border-thicker;
+            }
+        }
+        
+        @if $i % 3 == 0 {
+            #sudoku-square-#{$i}-#{$j} {
+                border-bottom: $sudoku-square-border-thicker;
+            }
+        }
 
-// Sudoku board - left border
-@for $i from 1 through 9 {
-    #sudoku-square-#{$i}-#{1} {
-        border-left: $sudoku-square-border;
+        @if $j == 1 {
+            #sudoku-square-#{$i}-#{$j} {
+                border-left: $sudoku-square-border-thicker;
+            }
+        }
+        
+        @if $j % 3 == 0 {
+            #sudoku-square-#{$i}-#{$j} {
+                border-right: $sudoku-square-border-thicker;
+            }
+        }
     }
 }
 
