@@ -92,6 +92,10 @@
   background-color: rgb(200, 200, 200);
 }
 
+.conflict {
+  color: red;
+}
+
 /* ===== Number Buttons ===== */
 .sudoku-numbers {
   display: flex;

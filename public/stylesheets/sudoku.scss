@@ -39,6 +39,11 @@
     background-color: $sudoku-square-color-focused;
 }
 
+// if conflicting with another square
+.conflict {
+    color: $sudoku-square-font-color-conflict;
+}
+
 /* ===== Number Buttons ===== */
 .sudoku-numbers {
     display: flex;

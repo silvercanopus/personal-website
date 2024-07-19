@@ -6,10 +6,10 @@ Todo:
     - (content) July Dev Log
 - (feature/content) About/Timeline page 
 - (feature/content) Sudoku game
-    - Board state validation
     - Starting board generator
     - How to play description on side board
     - Ctrl+Z to undo
+    - Testing via Jest?
     - Optional assistance features
 - (feature/content) Youtube downloader
 - (design) Play around with style more
