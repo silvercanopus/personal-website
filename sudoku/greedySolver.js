@@ -1,5 +1,6 @@
 const solve = function (board) {
     // Array to store found solutions
+    let solvable = false;
     const solutions = [];
 
     // Array to store square dependencies (to help with iteration)
@@ -37,6 +38,12 @@ const solve = function (board) {
         for (let c = 0; c < 9; c++) {
             if (board[r][c] != 0) {
                 options[r][c].add(board[r][c]);
+                // Check for conflicts among starting squares
+                for (let [rr, cc] of dependencies[r][c]) {
+                    if (board[rr][cc] == board[r][c]) {
+                        return {solvable, solutions};
+                    }
+                }
             }
             else {
                 for (let num = 1; num <= 9; num++) {
@@ -115,7 +122,7 @@ const solve = function (board) {
         }
     }
 
-    const solvable = solver(board);
+    solvable = solver(board);
     return {solvable, solutions};
 }
 
