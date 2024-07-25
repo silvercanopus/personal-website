@@ -4,6 +4,12 @@ const Sudoku = require('../../models/sudoku/sudoku');
 const sudoku = new Sudoku();
 let focus = null;
 
+// TODO: Expand difficulty setting
+const startingSquaresMedium = 33;
+
+// Initialize with a random board
+sudoku.generateNewBoard(startingSquaresMedium);
+
 // Get a reference for the page element
 const page = document.querySelector('body');
 
@@ -13,7 +19,6 @@ const squares = [];
 while (squareElements.length) {
     squares.push(squareElements.splice(0, 9));
 }
-const numberButtons = [...document.querySelectorAll('.sudoku-number-button')];
 
 // Function for rendering the current board state onto the page
 function render() {
@@ -127,6 +132,9 @@ page.addEventListener('keyup', (event) => {
     }
 });
 
+// Get a reference for the number keys (for input via clicking)
+const numberButtons = [...document.querySelectorAll('.sudoku-number-button')];
+
 // Add click event to the number buttons
 for (let i = 0; i < 9; i++) {
     numberButtons[i].addEventListener('click', (event) => {
@@ -137,6 +145,17 @@ for (let i = 0; i < 9; i++) {
         event.stopPropagation();
     });
 }
+
+// Get a reference for the menu buttons
+const newGameButton = document.querySelector('#sudoku-new-game-button');
+
+// Add click event for the new game button
+newGameButton.addEventListener('click', (event) => {
+    sudoku.generateNewBoard(startingSquaresMedium);
+    focus = null;
+    render();
+    event.stopPropagation();
+})
 
 // First render
 render();

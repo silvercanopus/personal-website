@@ -42,6 +42,16 @@ class Sudoku {
         this.#board[row][col] = num;
     }
 
+    // Generate a new random board
+    // - minStartSquares: Specify the number of filled squares in 
+    // the starting board, which is a measure of difficulty. The
+    // function will try to reach this target number as close as 
+    // possible while maintaining the unique solution.
+    generateNewBoard (minStartSquares = 0) {
+        const { startState, endState } = generator(minStartSquares);
+        this.#board = startState;
+    }
+
     // Validate the current board state, returning an object:
     // - gameover: boolean indicating whether the game is over (all squares
     //             have been filled and there are no conflicts)
