@@ -2,6 +2,7 @@ const Sudoku = require('../../models/sudoku/sudoku');
 
 /* ===== CONTROLLER ====== */
 const sudoku = new Sudoku();
+let focus = null;
 
 // Get a reference for the page element
 const page = document.querySelector('body');
@@ -34,7 +35,6 @@ function render() {
     }
 
     // Add focus indicator
-    const focus = sudoku.getFocus();
     if (focus) {
         let [r, c] = focus;
         squares[r][c].classList.add('focused');
@@ -51,7 +51,7 @@ for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
         squares[r][c].addEventListener('click', (event) => {
             try {
-                sudoku.focus(r, c);
+                focus = [r, c];
                 event.stopPropagation();
                 render();
             }
@@ -64,7 +64,7 @@ for (let r = 0; r < 9; r++) {
 
 // Add click event outside the board that removes focus
 page.addEventListener('click', (event) => {
-    sudoku.unfocus();
+    focus = null;
     render();
 })
 
@@ -87,8 +87,8 @@ page.addEventListener('keyup', (event) => {
 
     // Movement via arrow keys
     if (arrowKeys.includes(keyName)) {
-        let newFocus = sudoku.getFocus();
-        if (newFocus) {
+        if (focus) {
+            let newFocus = [...focus];
             switch (keyName) {
                 case "ArrowUp": 
                     newFocus[0]--;
@@ -104,7 +104,7 @@ page.addEventListener('keyup', (event) => {
                     break;
             }
             if (sudoku.isValidCoordinate(...newFocus)) {
-                sudoku.focus(...newFocus);
+                focus = newFocus;
                 render();
             }
         }
@@ -112,16 +112,16 @@ page.addEventListener('keyup', (event) => {
 
     // Changing number via number keys
     else if (numberKeys.includes(keyName)) {
-        if (sudoku.getFocus()) {
-            sudoku.changeSquare(Number.parseInt(keyName));
+        if (focus) {
+            sudoku.changeSquareAt(...focus, Number.parseInt(keyName));
             render();
         }
     }
     
     // Valid keys for deletion
     else if (keyName == "Backspace" || keyName == "Delete" || keyName == " ") {
-        if (sudoku.getFocus()) {
-            sudoku.changeSquare(0);
+        if (focus) {
+            sudoku.changeSquareAt(...focus, 0);
             render();
         }
     }
@@ -130,8 +130,8 @@ page.addEventListener('keyup', (event) => {
 // Add click event to the number buttons
 for (let i = 0; i < 9; i++) {
     numberButtons[i].addEventListener('click', (event) => {
-        if (sudoku.getFocus()) {
-            sudoku.changeSquare(i+1);
+        if (focus) {
+            sudoku.changeSquareAt(...focus, i+1);
             render();
         }
         event.stopPropagation();

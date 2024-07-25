@@ -2,7 +2,6 @@
 // Create a class to represent the state of the sudoku game
 class Sudoku {
     #board = null;
-    #focus = null;
 
     // Constructor
     // TODO: Add a way to randomize starting board with RNG 
@@ -15,14 +14,6 @@ class Sudoku {
         return this.#board.map(row => row.map(square => square));
     }
 
-    // Getter for the focused square coordinate, return a deep copy
-    getFocus () {
-        if (this.#focus) {
-            return [...this.#focus];
-        }
-        return null;
-    }
-
     // Checker for square coordinates
     isValidCoordinate (row, col) {
         if (typeof(row) != "number") {
@@ -32,19 +23,6 @@ class Sudoku {
             throw TypeError("'col' argument must be a number");
         }
         return (row >= 0) && (row < 9) && (col >= 0) && (col < 9);
-    }
-
-    // Switch focus to the specified coordinate
-    focus (row, col) {
-        if (!this.isValidCoordinate(row, col)) {
-            throw Error("Invalid square coordinate");
-        }
-        this.#focus = [row, col];
-    }
-
-    // Remove focus
-    unfocus () {
-        this.#focus = null;
     }
 
     // Change the number of the square at the specified coordinate
@@ -59,14 +37,6 @@ class Sudoku {
             throw Error("'num' argument must be between 0-9");
         }
         this.#board[row][col] = num;
-    }
-
-    // Change the number of the focused square
-    changeSquare (num) {
-        if (!this.#focus) {
-            throw Error("No square is being focused on");
-        }
-        this.changeSquareAt(...this.#focus, num);
     }
 
     // Validate the current board state, returning an object:
