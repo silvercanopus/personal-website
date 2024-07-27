@@ -1,5 +1,6 @@
 const generator = require('./generator');
-const validator = require('./validator')
+const checkEmpty = require('./checkEmpty');
+const checkConflict = require('./checkConflict');
 
 /* ===== MODEL ====== */
 // Create a class to represent the state of the sudoku game
@@ -58,7 +59,15 @@ class Sudoku {
     // - empty: an array of coordinates [r,c] of unfilled squares
     // - conflict: an array of coordinates [r,c] of conflicting squares
     validate () {
-        return validator(this.#board);
+        const res = {
+            gameover: false,    
+            empty: checkEmpty(this.#board),
+            conflict: checkConflict(this.#board)
+        }
+
+        res.gameover = res.empty.length == 0 && res.conflict.length == 0;
+
+        return res;
     }
 }
 
