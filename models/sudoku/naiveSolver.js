@@ -1,3 +1,6 @@
+// Naive sudoku solver that returns an array of valid solutions from
+// the given board state. The solver will stop after two solutions
+// have been found.
 const solve = function (board) {
     const solutions = [];
 
@@ -75,8 +78,9 @@ const solve = function (board) {
         }
     }
 
-    const solvable = solver(board, 0, 0);
-    return {solvable, solutions};
+    solver(board, 0, 0);
+
+    return solutions;
 }
 
 module.exports = solve;

@@ -46,10 +46,11 @@ const generate = function (minStartSquares = 0) {
     for (const [row, col] of indices) {
         shuffle(numbers);
         for (const num of numbers) {
+            // Try this number
             state[row][col] = num;
             // check for a solution
-            const { solvable, solutions } = solver(state);
-            if (!solvable) {
+            const solutions = solver(state);
+            if (solutions.length == 0) {
                 // no solution found, revert
                 state[row][col] = 0;
             }
@@ -67,7 +68,7 @@ const generate = function (minStartSquares = 0) {
     }
 
     // Step 2: Store the unique solution
-    const { solutions } = solver(state);
+    const solutions = solver(state);
     const startState = solutions[0].map(row => row.map(square => square));
     const endState = solutions[0].map(row => row.map(square => square));
 
@@ -83,9 +84,9 @@ const generate = function (minStartSquares = 0) {
         // try removing the current square
         const num = startState[row][col];
         startState[row][col] = 0;
-        const { solvable, solutions } = solver(startState);
-        if (!solvable || solutions.length > 1) {
-            // no more unique solution, revert
+        const solutions = solver(startState);
+        if (solutions.length != 1) {
+            // no longer has unique solution, revert
             startState[row][col] = num;
         }
         else {

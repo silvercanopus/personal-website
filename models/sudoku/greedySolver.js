@@ -1,8 +1,10 @@
 const dependencies = require('./boardDependencies');
 
+// Greedy sudoku solver that returns an array of valid solutions from
+// the given board state. The solver will stop after two solutions
+// have been found.
 const solve = function (board) {
     // Array to store found solutions
-    let solvable = false;
     const solutions = [];
 
     // Array to store valid number options
@@ -14,7 +16,8 @@ const solve = function (board) {
                 // Check for conflicts among starting squares
                 for (let [rr, cc] of dependencies[r][c]) {
                     if (board[rr][cc] == board[r][c]) {
-                        return {solvable, solutions};
+                        // Conflict found
+                        return solutions;
                     }
                 }
             }
@@ -95,8 +98,9 @@ const solve = function (board) {
         }
     }
 
-    solvable = solver(board);
-    return {solvable, solutions};
+    solver(board);
+    
+    return solutions;
 }
 
 module.exports = solve;
