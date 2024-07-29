@@ -15,6 +15,9 @@ const testBoard = [
 
 // Define a helper function
 const hasConflict = function (row, col) {
+    if (testBoard[row][col] == 0) {
+        return false;
+    }
     for (const [r,c] of dependencies[row][col]) {
         if (testBoard[row][col] == testBoard[r][c]) {
             return true;

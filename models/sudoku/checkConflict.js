@@ -15,6 +15,9 @@ const checkConflict = function (board, validateBoard = false) {
     // Add any conflicting squares to the result array
     for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
+            if (board[row][col] == 0) {
+                continue;
+            }
             let hasConflict = false;
             for (let [r,c] of dependencies[row][col]) {
                 if (board[row][col] == board[r][c]) {
