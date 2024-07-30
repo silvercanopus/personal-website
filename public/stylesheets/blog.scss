@@ -1,0 +1,18 @@
+@use 'variables' as *;
+
+.blog-post-image-container {
+    justify-content: center;
+    align-items: center;
+    margin: 2em auto;
+}
+
+.blog-post-image {
+    width: $blog-image-width;
+    margin: auto;
+}
+
+.blog-post-image-caption {
+    justify-content: center;
+    font-size: $blog-image-caption-font-size;
+    font-style: $blog-image-caption-font-style;
+}

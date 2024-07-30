@@ -1,0 +1,16 @@
+.blog-post-image-container {
+  justify-content: center;
+  align-items: center;
+  margin: 2em auto;
+}
+
+.blog-post-image {
+  width: 80%;
+  margin: auto;
+}
+
+.blog-post-image-caption {
+  justify-content: center;
+  font-size: 1em;
+  font-style: italic;
+}/*# sourceMappingURL=blog.css.map */
