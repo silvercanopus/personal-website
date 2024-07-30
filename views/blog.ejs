@@ -1,4 +1,5 @@
 <% layout('./layouts/boilerplate') -%>
+<link rel="stylesheet" href="/stylesheets/blog.css">
 <header>
     <%- include('./partials/navbar', { activePage: "Blog" }) %>
 </header>
@@ -8,6 +9,45 @@
             A collection of thoughts on all kinds of topics.
         </div>
         <div class="accordion">
+            <div class="accordion-item">
+                <!-- 2024-07-30 Blog Post -->
+                <div class="accordion-header">
+                    <button class="accordion-button collapsed bg-success text-light" type="button" data-bs-toggle="collapse" data-bs-target="#postTwo" aria-expanded="false" aria-controls="postTwo">
+                        <div class="blog-post-title">2024/07/30 - Dev Log - July 2024</div>
+                    </button>
+                </div>
+                <div class="accordion-collapse collapse" id="postTwo">
+                    <div class="accordion-body blog-post-body bg-success-subtle">
+                        <p>With this post, I'm starting a new kind of content on this website: dev log. What does it stand for, anyway? Developer log? Development log? Doesn't matter. I was inspired by the idea while I was learning game dev a while back. I think of it as a type of journaling for a software that's under development, like this website! It'll contain an overview of the tools and technologies I'm using, how well they work, what problems I'm trying to solve, et cetera. The hope is that, if you're thinking of starting a similar project, then this can provide some guidance. It also has a personal use case of being a record for me to look back on in the future. With that introduction out of the way, let's talk about the more technical stuff.</p>
+                        <figure class="container blog-post-image-container">
+                            <img class="row img-fluid blog-post-image" src="/images/2024_07_30_home_page.png" alt="Current state of the home page">
+                            <figcaption class="row blog-post-image-caption">Current state of the home page</figcaption>
+                        </figure>
+                        <p>There are many ways of creating a website. The one I'm using just happens to be inspired by the project I did for the "Web Developer Bootcamp" course by Colt Steele, which I took around 2 years ago. Starting with the basic stuff, I used <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, and <b>Node.js</b> just like most other web projects. I then used <b>Express</b> to serve as the back-end component and create some basic routes, <b>EJS</b> as my templating language, and <b>Bootstrap</b> as my CSS framework. These are all tools that I learned in the course and I think they act as a good starting point for making <em>something</em>.</p>
+                        <p>However, as I keep working on the website, I'm encountering problems that require new tools to solve. Well, not that I need those new tools, but they certainly make the solving easier. One example is the problem of how to integrate my own custom styles with Bootstrap. As convenient as that framework might be, I do like having the creative freedom to decide how my own website is going to look.</p>
+                        <p>After a brief research, I learned two ways of integrating my own style. The first is to create a stylesheet and link it just after the one imported from Bootstrap. The second is to download Bootstrap into the project, then create an intermediary Sass file to make modifications to Bootstrap's Sass files. This prompted me to learn <b>Sass</b> for the first time and wow, I should've learned it immediately after CSS. You can do so much more with it! In the end, I decided that I still want to keep importing Bootstrap via CDN for now, so I'm going with the first method.</p>
+                        <p>Another problem I encountered early on was how to organize my JavaScript files so that they can be used by the website. It turns out that once the website is up and running, it can only access files that are stored in the designated 'static' directory. Not only that, but I have to use the ESM syntax for importing code between JavaScript files. Nothing wrong with ESM, but I'm more used to the CJS syntax which is what Node is using. This conflicting requirement gave me a headache until I finally found a solution: module bundling.</p>
+                        <p>Prior to this point, I had heard the name <b>Webpack</b> getting mentioned quite often in the web development bubble but I didn't know what it actually does. I learned that it's a type of tool called a module bundler and its description sounds like it's the perfect tool to solve this problem I'm having. However, when looking up module bundling in general, I learned that Vite might be a more recent, better alternative to Webpack.</p>
+                        <p>I tried learning Vite for a couple of days and it does seem like a pretty good tool for front-end development. However, when I tried to integrate it into my website, I ran into more problems due to how I'm setting up my back-end with Express and EJS. Configuring Vite became so much of a headache that I decided to learn Webpack instead and I was able to solve my problem pretty much immediately. That's the difference between an opinionated and a non-opinionated tool, I suppose.</p>
+                        <figure class="container blog-post-image-container">
+                            <img class="row img-fluid blog-post-image" src="/images/2024_07_30_blog_page.png" alt="Current state of the blog page">
+                            <figcaption class="row blog-post-image-caption">Current state of the blog page</figcaption>
+                        </figure>
+                        <p>Currently, my website only has a few basic pages. There's no need for fancy design yet because there's barely any content to begin with. The two pages that I'm actively working on are the blog page and the sudoku page. For the blog page, I'm hoping to learn and integrate a database eventually so that I can store the blog content in the back-end instead of writing them directly in the EJS (HTML) files which, you know, doesn't seem like a very good approach. Preferably that happens before this website gets deployed.</p>
+                        <p>The sudoku page is the part where I'm currently spending most of my time on. The goal is for this to be a part of my portfolio once it's finished. This is definitely something that will be easier to make if I'm using React. However, since I'm still in the middle of reviewing and learning more about React, I've opted to just use plain JavaScript to make all the interactivity.</p>
+                        <p>Making a sudoku application is complicated enough that it also makes sense for me to write some tests. I've only learned <b>Jest</b> so far and I won't say I particularly enjoy writing tests, but it is an essential skill for any programmer to have. I have already discovered some sneaky bugs just from writing some unit tests.</p>
+                        <figure class="container blog-post-image-container">
+                            <img class="row img-fluid blog-post-image" src="/images/2024_07_30_sudoku_page.png" alt="Current state of the sudoku page">
+                            <figcaption class="row blog-post-image-caption">Current state of the sudoku page</figcaption>
+                        </figure>
+                        <p>Another tool that helped me fix errors is version control. It turns out that there are many version control tools out there but I'm sticking with <b>Git</b> for this project. Having this tool is great because now I can afford to be more experimental, knowing that I can roll back to any previously created checkpoints. I used that feature when I was playing around with Vite, realized it wasn't working for my project, and reverted all the changes with one simple command. But you don't need me to convince you that using version control is a massive boon when developing a software.</p>
+                        <p>Alongside Git, I'm also using <b>GitHub</b> to create a copy of my repository online. This tool isn't as essential because I'm the only person working on this project, but it might come in handy when I need to work on the project on a different machine later. Besides, it's also a good way to show my code to other people and keep a track record of how much I've been working on it.</p>
+                        <p>Speaking of checkpoints, I've been thinking of making a feature where I can temporarily revert to older versions of this website. Like a yearly version or something. After all, one of the purposes of this website is to be something I can look back on in the future. Screenshots like the ones I'm showing in this post can only capture so much information. It would be nice if I could also see how the website's interactivity changes over time. But I'm assigning this feature as low priority for now.</p>
+                        <p>I will also try to get this website deployed in a couple of months or so. Right now, this website only exists on my machine and my GitHub page, nobody else can interact with it. I'll start working on deployment once I've completed the sudoku page and integrated a database.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 2024-07-12 Blog Post -->
             <div class="accordion-item">
                 <div class="accordion-header">
                     <button class="accordion-button collapsed bg-success text-light" type="button" data-bs-toggle="collapse" data-bs-target="#postOne" aria-expanded="false" aria-controls="postOne">

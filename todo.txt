@@ -1,9 +1,8 @@
 This is a very basic method of project management.
 
 Todo:
+- (design) Style blog page to be more responsive
 - (feature/content) Tools used to create this website
-- (feature) Dev log page
-    - (content) July Dev Log
 - (feature/content) About/Timeline page 
 - (feature/content) Sudoku game
     - How to play description on side board
