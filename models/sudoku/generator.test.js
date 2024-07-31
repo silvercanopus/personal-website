@@ -2,7 +2,7 @@ const generate = require('./generator');
 const checkEmpty = require('./checkEmpty');
 const checkConflict = require('./checkConflict');
 
-const { startState, endState } = generate();
+const { startState, endState } = generate(30);
 
 test("generator data type", () => {
     const hasValidType = function(board) {
