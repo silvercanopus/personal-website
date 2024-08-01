@@ -7,7 +7,6 @@ Todo:
 - (feature/content) Sudoku game
     - How to play description on side board
     - Ctrl+Z to undo
-    - Testing via Jest?
     - Optional assistance features
 - (feature/content) Youtube downloader
 - (design) Play around with style more
