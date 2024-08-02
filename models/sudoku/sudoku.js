@@ -6,16 +6,22 @@ const checkConflict = require('./checkConflict');
 // Create a class to represent the state of the sudoku game
 class Sudoku {
     #board = null;
+    #start = null;
 
-    // Constructor
-    // TODO: Add a way to randomize starting board with RNG 
+    // Constructor that initializes the sudoku game with an empty board
     constructor () {
+        this.#start = new Array(9).fill(0).map(() => new Array(9).fill(0));
         this.#board = new Array(9).fill(0).map(() => new Array(9).fill(0));
     }
 
     // Getter for the board, return a deep copy
     getBoard () {
         return this.#board.map(row => row.map(square => square));
+    }
+
+    // Getter for starting state
+    getStartState () {
+        return this.#start.map(row => row.map(square => square));
     }
 
     // Checker for square coordinates
@@ -29,7 +35,9 @@ class Sudoku {
         return (row >= 0) && (row < 9) && (col >= 0) && (col < 9);
     }
 
-    // Change the number of the square at the specified coordinate
+    // Change the number of the square at the specified coordinate.
+    // Can only change a non-starting square.
+    // Return true if the change operation is successful, false otherwise.
     changeSquareAt (row, col, num) {
         if (!this.isValidCoordinate(row, col)) {
             throw Error("Invalid square coordinate");
@@ -40,7 +48,12 @@ class Sudoku {
         if (num < 0 || num > 9) {
             throw Error("'num' argument must be between 0-9");
         }
+        if (this.#start[row][col] > 0) {
+            // The coordinate is a starting square
+            return false
+        }
         this.#board[row][col] = num;
+        return true;
     }
 
     // Generate a new random board
@@ -50,7 +63,12 @@ class Sudoku {
     // possible while maintaining the unique solution.
     generateNewBoard (minStartSquares = 0) {
         const { startState, endState } = generator(minStartSquares);
-        this.#board = startState;
+        this.#start = startState;
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                this.#board[row][col] = startState[row][col];
+            }
+        }
     }
 
     // Validate the current board state, returning an object:
