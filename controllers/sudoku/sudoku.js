@@ -7,9 +7,6 @@ let focus = null;
 // TODO: Expand difficulty setting
 const startingSquaresMedium = 33;
 
-// Initialize with a random board
-sudoku.generateNewBoard(startingSquaresMedium);
-
 // Get a reference for the page element
 const page = document.querySelector('body');
 
@@ -18,6 +15,29 @@ const squareElements = [...document.querySelectorAll('.sudoku-square')];
 const squares = [];
 while (squareElements.length) {
     squares.push(squareElements.splice(0, 9));
+}
+
+// A function for starting a new game
+function newGame() {
+    // Initialize with a random board
+    sudoku.generateNewBoard(startingSquaresMedium);
+
+    // Add a special class for the starting squares
+    const startState = sudoku.getStartState();
+    for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+            squares[row][col].classList.remove('starting-square');
+            if (startState[row][col] > 0) {
+                squares[row][col].classList.add('starting-square');
+            }
+        }
+    }
+
+    // Reset focus
+    focus = null;
+
+    // Render the new game state
+    render();
 }
 
 // Function for rendering the current board state onto the page
@@ -151,11 +171,9 @@ const newGameButton = document.querySelector('#sudoku-new-game-button');
 
 // Add click event for the new game button
 newGameButton.addEventListener('click', (event) => {
-    sudoku.generateNewBoard(startingSquaresMedium);
-    focus = null;
-    render();
+    newGame();
     event.stopPropagation();
 })
 
-// First render
-render();
+// Start the game
+newGame();
