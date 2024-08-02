@@ -12,8 +12,13 @@
   font-size: 1.25em;
   text-align: center;
   align-content: center;
+  font-weight: 300;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
+}
+
+.starting-square {
+  font-weight: 500;
 }
 
 #sudoku-square-1-1 {

@@ -14,10 +14,15 @@
     font-size: $sudoku-square-font-size;
     text-align: center;
     align-content: center;
+    font-weight: $sudoku-square-font-weight-regular;
 
     // default border
     border-right: $sudoku-square-border;
     border-bottom: $sudoku-square-border;
+}
+
+.starting-square {
+    font-weight: $sudoku-square-font-weight-bold;
 }
 
 // thicker border for board perimeter and 3x3 sections
