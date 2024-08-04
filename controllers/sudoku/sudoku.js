@@ -3,6 +3,7 @@ const Sudoku = require('../../models/sudoku/sudoku');
 /* ===== CONTROLLER ====== */
 const sudoku = new Sudoku();
 let focus = null;
+let gameover = false;
 
 // TODO: Expand difficulty setting
 const startingSquaresMedium = 33;
@@ -36,6 +37,9 @@ function newGame() {
     // Reset focus
     focus = null;
 
+    // Reset gameOver state
+    gameover = false;
+
     // Render the new game state
     render();
 }
@@ -68,6 +72,14 @@ function render() {
     // Add conflict indicator
     for (const [r, c] of val.conflict) {
         squares[r][c].classList.add('conflict');
+    }
+
+    // If the board has been successfully completed
+    if (!gameover && val.gameover) {
+        gameover = true;
+        setTimeout(() => {
+            alert("Board Complete!");
+        }, 100);
     }
 }
 
