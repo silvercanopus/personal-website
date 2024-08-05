@@ -6,8 +6,8 @@ Todo:
 - (feature/content) About/Timeline page 
 - (feature/content) Sudoku game
     - How to play description on side board
+    - Asynchronous board generation
     - Optional assistance features:
-        - Ctrl+Z to undo
         - Difficulty options
         - Show conflicting squares (hide by default)
         - Highlight same number squares

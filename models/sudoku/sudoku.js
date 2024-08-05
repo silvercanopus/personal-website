@@ -24,6 +24,11 @@ class Sudoku {
         return this.#start.map(row => row.map(square => square));
     }
 
+    // Getter for a specific square
+    getSquareAt (row, col) {
+        return this.#board[row][col];
+    }
+
     // Checker for square coordinates
     isValidCoordinate (row, col) {
         if (typeof(row) != "number") {

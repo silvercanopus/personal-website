@@ -4,6 +4,7 @@ const Sudoku = require('../../models/sudoku/sudoku');
 const sudoku = new Sudoku();
 let focus = null;
 let gameover = false;
+const changeHistory = [];
 
 // TODO: Expand difficulty setting
 const startingSquaresMedium = 33;
@@ -39,6 +40,9 @@ function newGame() {
 
     // Reset gameOver state
     gameover = false;
+
+    // Reset change history
+    changeHistory = [];
 
     // Render the new game state
     render();
@@ -80,6 +84,36 @@ function render() {
         setTimeout(() => {
             alert("Board Complete!");
         }, 100);
+    }
+}
+
+// Function to change the number of the currently focused square
+function changeFocusedSquare(num) {
+    if (focus) {
+        // Change the square
+        const prevNum = sudoku.getSquareAt(...focus);
+        const success = sudoku.changeSquareAt(...focus, num);
+        
+        if (success) {
+            // Add to history so this action can be undone later
+            changeHistory.push({
+                square: [...focus],
+                from: prevNum,
+                to: num
+            })
+
+            // Re-render
+            render();
+        }
+    }
+}
+
+// Function to revert latest changes (undo)
+function undo() {
+    if (changeHistory.length > 0) {
+        const lastChange = changeHistory.pop();
+        sudoku.changeSquareAt(...lastChange.square, lastChange.from);
+        render();
     }
 }
 
@@ -149,18 +183,17 @@ page.addEventListener('keyup', (event) => {
 
     // Changing number via number keys
     else if (numberKeys.includes(keyName)) {
-        if (focus) {
-            sudoku.changeSquareAt(...focus, Number.parseInt(keyName));
-            render();
-        }
+        changeFocusedSquare(Number.parseInt(keyName));
     }
     
     // Valid keys for deletion
     else if (keyName == "Backspace" || keyName == "Delete" || keyName == " ") {
-        if (focus) {
-            sudoku.changeSquareAt(...focus, 0);
-            render();
-        }
+        changeFocusedSquare(0);
+    }
+
+    // Undo command
+    else if (event.ctrlKey && keyName == "z") {
+        undo();
     }
 });
 
@@ -170,10 +203,7 @@ const numberButtons = [...document.querySelectorAll('.sudoku-number-button')];
 // Add click event to the number buttons
 for (let i = 0; i < 9; i++) {
     numberButtons[i].addEventListener('click', (event) => {
-        if (focus) {
-            sudoku.changeSquareAt(...focus, i+1);
-            render();
-        }
+        changeFocusedSquare(i+1);
         event.stopPropagation();
     });
 }
