@@ -1,6 +1,32 @@
 @use 'variables' as *;
 
 /* ===== Board & Squares ===== */
+.sudoku-board {
+    position: relative;
+}
+
+.sudoku-board-overlay {
+    position: absolute;
+    display: none;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: $sudoku-board-overlay-font-color;
+    font-size: $sudoku-board-overlay-font-size;
+    font-weight: $sudoku-board-overlay-font-weight;
+}
+
+.loading-overlay {
+    display: flex;
+    background-color: $sudoku-board-overlay-loading-color;
+}
+
+.victory-overlay {
+    display: flex;
+    background-color: $sudoku-board-overlay-victory-color;
+}
+
 .sudoku-row {
     display: flex;
     justify-content: center;

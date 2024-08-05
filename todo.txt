@@ -6,7 +6,6 @@ Todo:
 - (feature/content) About/Timeline page 
 - (feature/content) Sudoku game
     - How to play description on side board
-    - Asynchronous board generation
     - Optional assistance features:
         - Difficulty options
         - Show conflicting squares (hide by default)

@@ -4,13 +4,16 @@ const Sudoku = require('../../models/sudoku/sudoku');
 const sudoku = new Sudoku();
 let focus = null;
 let gameover = false;
-const changeHistory = [];
+let changeHistory = [];
 
 // TODO: Expand difficulty setting
 const startingSquaresMedium = 33;
 
 // Get a reference for the page element
 const page = document.querySelector('body');
+
+// Get a reference for the overlay element
+const overlay = document.querySelector('.sudoku-board-overlay');
 
 // Get a reference for each of the square elements
 const squareElements = [...document.querySelectorAll('.sudoku-square')];
@@ -19,8 +22,33 @@ while (squareElements.length) {
     squares.push(squareElements.splice(0, 9));
 }
 
-// A function for starting a new game
+// Function for adding an overlay on top of the board when it's being generated
+function addLoadingOverlay() {
+    overlay.innerText = "Generating a sudoku board..."
+    overlay.classList.add('loading-overlay');
+}
+
+// Function for adding an overlay on top of the board when it's fully completed
+function addVictoryOverlay() {
+    overlay.innerText = "Board Complete!"
+    overlay.classList.add('victory-overlay');
+}
+
+// Function for removing any overlay
+function removeOverlay() {
+    overlay.innerText = "";
+    overlay.classList.remove('loading-overlay');
+    overlay.classList.remove('victory-overlay');
+}
+
+// Function for starting a new game
 function newGame() {
+    // Reset any existing overlay
+    removeOverlay();
+
+    // Add a loading overlay until a new board has been generated
+    addLoadingOverlay();
+
     // Initialize with a random board
     sudoku.generateNewBoard(startingSquaresMedium);
 
@@ -43,6 +71,9 @@ function newGame() {
 
     // Reset change history
     changeHistory = [];
+
+    // Remove the loading overlay
+    removeOverlay();
 
     // Render the new game state
     render();
@@ -81,9 +112,7 @@ function render() {
     // If the board has been successfully completed
     if (!gameover && val.gameover) {
         gameover = true;
-        setTimeout(() => {
-            alert("Board Complete!");
-        }, 100);
+        addVictoryOverlay();
     }
 }
 

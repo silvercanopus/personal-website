@@ -1,4 +1,30 @@
 /* ===== Board & Squares ===== */
+.sudoku-board {
+  position: relative;
+}
+
+.sudoku-board-overlay {
+  position: absolute;
+  display: none;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.loading-overlay {
+  display: flex;
+  background-color: rgba(100, 100, 100, 0);
+}
+
+.victory-overlay {
+  display: flex;
+  background-color: rgba(0, 100, 0, 0.8);
+}
+
 .sudoku-row {
   display: flex;
   justify-content: center;
