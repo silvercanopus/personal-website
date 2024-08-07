@@ -103,3 +103,8 @@
     color: $sudoku-number-button-font-color;
     font-size: $sudoku-number-button-font-size;
 }
+
+/* ===== Side Board ===== */
+#sudoku-difficulty-setting > label {
+    margin-left: 5px;
+}

@@ -6,9 +6,6 @@ let focus = null;
 let gameover = false;
 let changeHistory = [];
 
-// TODO: Expand difficulty setting
-const startingSquaresMedium = 33;
-
 // Get a reference for the page element
 const page = document.querySelector('body');
 
@@ -20,6 +17,33 @@ const squareElements = [...document.querySelectorAll('.sudoku-square')];
 const squares = [];
 while (squareElements.length) {
     squares.push(squareElements.splice(0, 9));
+}
+
+// Get a reference for the difficulty radio buttons
+const difficultyOptions = {
+    "easy": {
+        "element": document.querySelector('#difficulty-easy'),
+        "startingSquares": 45
+    },
+    "medium": {
+        "element": document.querySelector('#difficulty-medium'),
+        "startingSquares": 33
+    },
+    "hard": {
+        "element": document.querySelector('#difficulty-hard'),
+        "startingSquares": 20
+    }
+}
+
+// Function for getting selected difficulty level
+function getDifficulty() {
+    for (const difficulty in difficultyOptions) {
+        if (difficultyOptions[difficulty].element.checked) {
+            return difficulty;
+        }
+    }
+    // default option
+    return "medium";
 }
 
 // Function for adding an overlay on top of the board when it's being generated
@@ -50,7 +74,7 @@ function newGame() {
     addLoadingOverlay();
 
     // Initialize with a random board
-    sudoku.generateNewBoard(startingSquaresMedium);
+    sudoku.generateNewBoard(difficultyOptions[getDifficulty()].startingSquares);
 
     // Add a special class for the starting squares
     const startState = sudoku.getStartState();

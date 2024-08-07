@@ -355,4 +355,9 @@
   background-color: white;
   color: black;
   font-size: 1.5em;
+}
+
+/* ===== Side Board ===== */
+#sudoku-difficulty-setting > label {
+  margin-left: 5px;
 }/*# sourceMappingURL=sudoku.css.map */
