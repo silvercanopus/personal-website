@@ -8,8 +8,6 @@ Todo:
     - How to play description on side board
     - (issue) Page sometimes crashes when generating board
     - Optional assistance features:
-        - Show conflicting squares (hide by default)
-        - Highlight same number squares
         - Indicator if a number has been used 9 times
         - Give hint for squares that only has one option remaining
     - Restyle & refactor

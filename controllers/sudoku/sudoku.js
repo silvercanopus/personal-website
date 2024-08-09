@@ -40,6 +40,7 @@ const difficultyOptions = {
 
 // Get a reference for the highlight options
 const highlightSameNumbers = document.querySelector('#same-numbers-checkbox');
+const highlightConflictingNumbers = document.querySelector('#conflicting-numbers-checkbox');
 
 // Function for getting selected difficulty level
 function getDifficulty() {
@@ -136,6 +137,13 @@ function render() {
         squares[r][c].classList.add('focused');
     }
 
+    // If option is selected, highlight conflicting squares
+    if (highlightConflictingNumbers.checked) {
+        for (const [r, c] of val.conflict) {
+            squares[r][c].classList.add('conflict');
+        }
+    }
+
     // If option is selected, highlight other squares with same number as the 
     // currently focused square
     if (highlightSameNumbers.checked) {
@@ -148,11 +156,6 @@ function render() {
                 }
             }
         }
-    }
-
-    // Add conflict indicator
-    for (const [r, c] of val.conflict) {
-        squares[r][c].classList.add('conflict');
     }
 
     // If the board has been successfully completed
@@ -298,6 +301,9 @@ newGameButton.addEventListener('click', (event) => {
 
 // Add onchange event for the highlight options
 highlightSameNumbers.addEventListener('change', (event) => {
+    render();
+})
+highlightConflictingNumbers.addEventListener('change', (event) => {
     render();
 })
 
