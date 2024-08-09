@@ -85,6 +85,11 @@
     background-color: $sudoku-square-color-focused;
 }
 
+// same number highlight
+.highlight-same {
+    background-color: $sudoku-square-color-focused;
+}
+
 // if conflicting with another square
 .conflict {
     color: $sudoku-square-font-color-conflict;
@@ -107,4 +112,8 @@
 /* ===== Side Board ===== */
 #sudoku-difficulty-setting > label {
     margin-left: 5px;
+}
+
+#sudoku-highlight-setting > input {
+    display: block;
 }

@@ -12,6 +12,9 @@ const page = document.querySelector('body');
 // Get a reference for the overlay element
 const overlay = document.querySelector('.sudoku-board-overlay');
 
+// Get a reference for the side board
+const sideboard = document.querySelector('.sudoku-sideboard');
+
 // Get a reference for each of the square elements
 const squareElements = [...document.querySelectorAll('.sudoku-square')];
 const squares = [];
@@ -34,6 +37,9 @@ const difficultyOptions = {
         "startingSquares": 20
     }
 }
+
+// Get a reference for the highlight options
+const highlightSameNumbers = document.querySelector('#same-numbers-checkbox');
 
 // Function for getting selected difficulty level
 function getDifficulty() {
@@ -117,8 +123,10 @@ function render() {
             else {
                 squares[r][c].innerText = "";
             }
+            // Reset all highlights
             squares[r][c].classList.remove('focused');
             squares[r][c].classList.remove('conflict');
+            squares[r][c].classList.remove('highlight-same');
         }
     }
 
@@ -126,6 +134,20 @@ function render() {
     if (focus) {
         let [r, c] = focus;
         squares[r][c].classList.add('focused');
+    }
+
+    // If option is selected, highlight other squares with same number as the 
+    // currently focused square
+    if (highlightSameNumbers.checked) {
+        if (focus && sudoku.getSquareAt(...focus) > 0) {
+            for (let row = 0; row < 9; row++) {
+                for (let col = 0; col < 9; col++) {
+                    if (sudoku.getSquareAt(row, col) == sudoku.getSquareAt(...focus)) {
+                        squares[row][col].classList.add('highlight-same');
+                    }
+                }
+            }
+        }
     }
 
     // Add conflict indicator
@@ -261,13 +283,22 @@ for (let i = 0; i < 9; i++) {
     });
 }
 
+// Prevent click events on side board to propagate upward
+sideboard.addEventListener('click', (event) => {
+    event.stopPropagation();
+})
+
 // Get a reference for the menu buttons
 const newGameButton = document.querySelector('#sudoku-new-game-button');
 
 // Add click event for the new game button
 newGameButton.addEventListener('click', (event) => {
     newGame();
-    event.stopPropagation();
+})
+
+// Add onchange event for the highlight options
+highlightSameNumbers.addEventListener('change', (event) => {
+    render();
 })
 
 // Start the game

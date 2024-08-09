@@ -339,6 +339,10 @@
   background-color: rgb(200, 200, 200);
 }
 
+.highlight-same {
+  background-color: rgb(200, 200, 200);
+}
+
 .conflict {
   color: red;
 }
@@ -360,4 +364,8 @@
 /* ===== Side Board ===== */
 #sudoku-difficulty-setting > label {
   margin-left: 5px;
+}
+
+#sudoku-highlight-setting > input {
+  display: block;
 }/*# sourceMappingURL=sudoku.css.map */
