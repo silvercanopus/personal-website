@@ -63,14 +63,29 @@ const generate = function (numStartSquares = 30) {
 
     // Step 2: Starting from one of the solutions, randomly remove 
     // numbers until the target number of starting squares is reached.
-    shuffle(indices);
+    // Prefer to maintain a unique solution if possible.
     let remainingSquares = indices.length;
-    for (const [row, col] of indices) {
+    shuffle(indices);
+    for (let i = 0; i < indices.length; i++) {
+        const [row, col] = indices[i];
+        // try removing this square
+        const num = startState[row][col];
+        startState[row][col] = 0;
+        remainingSquares--;
+        // check for number of solutions
+        const solutions = solver(startState);
+        if (solutions.length > 1) {
+            // no longer unique solution
+            if ((indices.length - i) > (remainingSquares - numStartSquares)) {
+                // can afford to skip this index
+                startState[row][col] = num;
+                remainingSquares++;
+            }
+        }
+        // if target is reached
         if (remainingSquares <= numStartSquares) {
             break;
         }
-        startState[row][col] = 0;
-        remainingSquares--;
     }
 
     // Return the starting board and the solution

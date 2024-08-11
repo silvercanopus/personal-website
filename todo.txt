@@ -6,6 +6,7 @@ Todo:
 - (feature/content) About/Timeline page 
 - (feature/content) Sudoku game
     - How to play description on side board
+    - Timer?
     - Optional assistance features:
         - Indicator if a number has been used 9 times
         - Give hint for squares that only has one option remaining
