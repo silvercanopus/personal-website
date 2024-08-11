@@ -11,87 +11,66 @@ const shuffle = function (arr) {
     }
 }
 
+// Helper array that stores all the possible sudoku numbers
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+// Helper array that stores all the possible square indices
+const indices = [];
+for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+        indices.push([r, c]);
+    }
+}
+
 // This function generates a random unfinished sudoku board that 
-// is guaranteed to have a unique solution.
+// is guaranteed to have at least one solution.
 // Arguments:
-// - minStartSquares: Specify the number of filled squares in 
-// the starting board, which is a measure of difficulty. The
-// function will try to reach this target number as close as 
-// possible while maintaining the unique solution.
+// - numStartSquares: Specify the number of filled squares in 
+// the starting board, which is a measure of difficulty. 
 // Returns: object
 // {
 //   'startState': 9x9 array representing the initial state of the board
-//   'endState': 9x9 array representing the unique solution
+//   'endState': 9x9 array representing a solution to the starting state
 // }
-const generate = function (minStartSquares = 0) {
-    const state = new Array(9).fill(0).map(() => new Array(9).fill(0));
+const generate = function (numStartSquares = 30) {
+    let startState = null;
+    let endState = null;
 
-    // Step 1: Starting with an empty board, randomly add numbers
-    // until it has only one unique solution
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    
-    // Step 1a: Create an array of indices
-    const indices = [];
-    for (let r = 0; r < 9; r++) {
-        for (let c = 0; c < 9; c++) {
-            indices.push([r, c]);
-        }
-    }
-
-    // Step 1b: Shuffle the indices
-    shuffle(indices);
-
-    // Step 1c: Add random numbers one index at a time
-    let uniqueSolutionFound = false;
-    for (const [row, col] of indices) {
-        shuffle(numbers);
-        for (const num of numbers) {
-            // Try this number
-            state[row][col] = num;
-            // check for a solution
-            const solutions = solver(state);
-            if (solutions.length == 0) {
-                // no solution found, revert
-                state[row][col] = 0;
-            }
-            else {
-                if (solutions.length == 1) {
-                    // unique solution found
-                    uniqueSolutionFound = true;
+    // Step 1: Randomly seed the upper left, middle, and bottom right
+    // 3x3 sections with numbers 1-9. These 3 sections are chosen
+    // because they are not conflicting with one another.
+    let seeded = false;
+    while(!seeded) {
+        const state = new Array(9).fill(0).map(() => new Array(9).fill(0));
+        for (let i = 0; i < 9; i += 3) {
+            shuffle(numbers);
+            let j = 0;
+            for (let row = i; row < i+3; row++) {
+                for (let col = i; col < i+3; col++) {
+                    state[row][col] = numbers[j];
+                    j++;
                 }
-                break;
             }
         }
-        if (uniqueSolutionFound) {
-            break;
+        const solutions = solver(state);
+        if (solutions.length > 0) {
+            seeded = true;
+            // copy one of the solutions
+            startState = solutions[0].map(row => row.map(num => num));
+            endState = solutions[0].map(row => row.map(num => num));
         }
     }
 
-    // Step 2: Store the unique solution
-    const solutions = solver(state);
-    const startState = solutions[0].map(row => row.map(square => square));
-    const endState = solutions[0].map(row => row.map(square => square));
-
-    // Step 3: Starting from the solution, randomly remove numbers
-    // until the target number of starting squares is reached,
-    // while maintaining the uniqueness of the solution
+    // Step 2: Starting from one of the solutions, randomly remove 
+    // numbers until the target number of starting squares is reached.
     shuffle(indices);
     let remainingSquares = indices.length;
     for (const [row, col] of indices) {
-        if (remainingSquares <= minStartSquares) {
+        if (remainingSquares <= numStartSquares) {
             break;
         }
-        // try removing the current square
-        const num = startState[row][col];
         startState[row][col] = 0;
-        const solutions = solver(startState);
-        if (solutions.length != 1) {
-            // no longer has unique solution, revert
-            startState[row][col] = num;
-        }
-        else {
-            remainingSquares--;
-        }
+        remainingSquares--;
     }
 
     // Return the starting board and the solution
